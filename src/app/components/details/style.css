@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+  gap: 1em;
+  margin: 1em 0;
+  font-size: larger;
+  align-items: start;
+}
+
+td {
+  padding-right: 1em;
+}
