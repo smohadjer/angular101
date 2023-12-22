@@ -13,7 +13,7 @@ import ProductInterface from '../../types/product';
     Product
   ],
   template: `
-      <p>This demo shows how to use:</p>
+      <p>This demo uses following Angular features:</p>
       <ul>
         <li>&#64;Input decorator</li>
         <li>*ngFor decorator</li>
