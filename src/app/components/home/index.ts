@@ -23,9 +23,10 @@ import ProductInterface from '../../types/product';
         <li>Routing</li>
       </ul>
       <hr>
+      <p>Search by title: <input (input)="changeHandler(myFilter.value)" #myFilter></p>
       <div class="grid">
         <app-product
-          *ngFor="let item of list" [product]="item">
+          *ngFor="let item of filteredList" [product]="item">
         </app-product>
       </div>
   `,
@@ -34,15 +35,25 @@ import ProductInterface from '../../types/product';
 
 export class Home {
   list: ProductInterface[] = [];
+  filteredList: ProductInterface[] = [];
 
   service = inject(ProductService);
 
-  // alternatively you can set a service simply by instantiating the class:
-  // quoteService = new QuoteService();
+  // this function needs throttling
+  changeHandler = (value:string) => {
+    this.filterResults(value, [...this.list]);
+  }
+
+  filterResults = (filter: string, results: ProductInterface[]) => {
+    this.filteredList = results.filter((item) => {
+      return item.title.toLowerCase().includes(filter.toLowerCase());
+    })
+  }
 
   constructor() {
     this.service.getAll().then((res) => {
       this.list = res;
+      this.filteredList = [...this.list];
     })
   }
 }
