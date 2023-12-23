@@ -17,7 +17,7 @@ import ProductInterface from '../../types/product';
   ],
   template: `
     <p><a [routerLink]="['/']">Home</a></p>
-    <div class="flex">
+    <div class="flex" *ngIf="product">
       <img src="{{product.thumbnail}}" alt=""/>
       <table>
         <tr><td>Product</td><td>{{product.title}}</td></tr>
@@ -36,12 +36,14 @@ import ProductInterface from '../../types/product';
 export class Details {
   route: ActivatedRoute = inject(ActivatedRoute);
   productId = -1;
-  product: ProductInterface;
+  product: ProductInterface | undefined;
 
   service = inject(ProductService);
 
   constructor() {
     this.productId = Number(this.route.snapshot.params['id']);
-    this.product = this.service.getById(this.productId)!;
+    this.service.getById(this.productId).then((product) => {
+      this.product = product;
+    })
   }
 }

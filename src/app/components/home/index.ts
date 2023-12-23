@@ -15,9 +15,11 @@ import ProductInterface from '../../types/product';
   template: `
       <p>This demo uses following Angular features:</p>
       <ul>
-        <li>&#64;Input decorator</li>
-        <li>*ngFor decorator</li>
+        <li>&#64;Input() directive</li>
+        <li>*ngFor directive</li>
+        <li>*ngIf directive</li>
         <li>Injecting a service</li>
+        <li>Fetching data async in a service class using Fetch API</li>
         <li>Routing</li>
       </ul>
       <hr>
@@ -39,7 +41,8 @@ export class Home {
   // quoteService = new QuoteService();
 
   constructor() {
-    this.list = this.service.getAll();
+    this.service.getAll().then((res) => {
+      this.list = res;
+    })
   }
-
 }
