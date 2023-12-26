@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { Product } from '../product/index';
 import { ProductService } from '../../services/product.service';
@@ -15,15 +16,15 @@ import ProductInterface from '../../types/product';
   template: `
       <p>This demo uses following Angular features:</p>
       <ul>
-        <li>&#64;Input() directive</li>
+        <li>&#64;Input() decorator</li>
+        <li>&#64;Injectable decorator to use service</li>
         <li>*ngFor directive</li>
         <li>*ngIf directive</li>
-        <li>Injecting a service</li>
-        <li>Fetching data async in a service class using Fetch API</li>
+        <li>Fetching data via Fetch API</li>
         <li>Routing</li>
       </ul>
       <hr>
-      <p>Search by title: <input (input)="changeHandler(myFilter.value)" #myFilter></p>
+      <p>Search by title: <input [value]="search || ''" (input)="changeHandler(myFilter.value)" #myFilter></p>
       <div class="grid">
         <app-product
           *ngFor="let item of filteredList" [product]="item">
@@ -36,24 +37,36 @@ import ProductInterface from '../../types/product';
 export class Home {
   list: ProductInterface[] = [];
   filteredList: ProductInterface[] = [];
+  router: Router = inject(Router);
+
+  @Input() search!: string;
 
   service = inject(ProductService);
+  timer: ReturnType<typeof setTimeout> | undefined = undefined;
 
-  // this function needs throttling
   changeHandler = (value:string) => {
-    this.filterResults(value, [...this.list]);
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.filterResults(value, [...this.list]);
+      // add filter to url
+      this.router.navigate(['/'], {queryParams: {search: value}});
+    }, 500);
   }
 
   filterResults = (filter: string, results: ProductInterface[]) => {
-    this.filteredList = results.filter((item) => {
-      return item.title.toLowerCase().includes(filter.toLowerCase());
-    })
+    if (filter) {
+      this.filteredList = results.filter((item) => {
+        return item.title.toLowerCase().includes(filter.toLowerCase());
+      })
+    } else {
+      this.filteredList = results;
+    }
   }
 
   constructor() {
     this.service.getAll().then((res) => {
       this.list = res;
-      this.filteredList = [...this.list];
+      this.filterResults(this.search, [...this.list]);
     })
   }
 }
