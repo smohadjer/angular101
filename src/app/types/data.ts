@@ -1,4 +1,4 @@
-export default interface ProductInterface {
+export default interface DataInterface {
   id: number;
   title: string;
   description: string;

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import ProductInterface from '../../types/product';
+import ProductInterface from '../../types/data';
 
 @Component({
   selector: 'app-product',

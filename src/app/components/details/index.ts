@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 
 import { Product } from '../product/index';
-import { ProductService } from '../../services/product.service';
-import ProductInterface from '../../types/product';
+import { DataService } from '../../services/data.service';
+import ProductInterface from '../../types/data';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class Details {
   productId = -1;
   product: ProductInterface | undefined;
 
-  service = inject(ProductService);
+  service = inject(DataService);
 
   constructor() {
     this.productId = Number(this.route.snapshot.params['id']);

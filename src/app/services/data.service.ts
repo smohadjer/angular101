@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
-import ProductInterface from '../types/product';
+import DataInterface from '../types/data';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ProductService {
+export class DataService {
   url = 'https://dummyjson.com/products';
 
-  products: ProductInterface[] = [];
+  products: DataInterface[] = [];
 
   async getAll() {
     // since fetchData is async, data may not be available when our service methods

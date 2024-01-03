@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { Product } from '../product/index';
-import { ProductService } from '../../services/product.service';
-import ProductInterface from '../../types/product';
+import { ProductService } from '../../services/data.service';
+import ProductInterface from '../../types/data';
 
 @Component({
   selector: 'app-root',
