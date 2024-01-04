@@ -11,7 +11,7 @@ export class DataService {
 
   products: DataInterface[] = [];
 
-  async getAll() {
+  async get() {
     // since fetchData is async, data may not be available when our service methods
    // are called, hence we check for that and invoke fetchData with await if
    // data is not fetched yet.

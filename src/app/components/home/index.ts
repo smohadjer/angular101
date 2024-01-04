@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { Product } from '../product/index';
-import { ProductService } from '../../services/data.service';
+import { DataService } from '../../services/data.service';
 import ProductInterface from '../../types/data';
 
 @Component({
@@ -41,7 +41,7 @@ export class Home {
 
   @Input() search!: string;
 
-  service = inject(ProductService);
+  //dataservice = inject(DataService);
   timer: ReturnType<typeof setTimeout> | undefined = undefined;
 
   changeHandler = (value:string) => {
@@ -63,10 +63,10 @@ export class Home {
     }
   }
 
-  constructor() {
-    this.service.getAll().then((res) => {
+  constructor(dataService: DataService) {
+    dataService.get().then(res => {
       this.list = res;
       this.filterResults(this.search, [...this.list]);
-    })
+    });
   }
 }
