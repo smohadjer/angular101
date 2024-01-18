@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/index';
 import { Details } from './components/details/index';
+import { InterceptParentComponent } from './intercept-parent';
 
 export const routes: Routes = [
   {
@@ -12,5 +13,10 @@ export const routes: Routes = [
     path: 'details/:id',
     component: Details,
     title: 'Product Detail'
+  },
+  {
+    path: 'intercept',
+    component: InterceptParentComponent,
+    title: 'intercept'
   }
 ];

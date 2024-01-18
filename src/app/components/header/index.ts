@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <header>
-      <div class="logo">Angular 101</div>
+      <div class="logo">Angular Sandbox</div>
     </header>
   `,
   styleUrl: './style.css'
