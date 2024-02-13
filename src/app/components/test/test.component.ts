@@ -8,11 +8,17 @@ import { ButtonComponent } from '../btn.component'
     ButtonComponent
   ],
   template: `
-    <app-btn (btnClick)="clickHandler()" text="EventEmitter"></app-btn>
+    <div>
+      <p>Example of EventEmitter</p>
+      <app-btn (customClick)="clickHandler($event)" text="EventEmitter"></app-btn>
+    </div>
   `
 })
 export class TestComponent {
-  clickHandler() {
-    alert('EventEmitter')
+  constructor() {}
+
+  clickHandler(event: string) {
+    console.log('clickhandler', event);
+    alert('EventEmitter');
   }
 }

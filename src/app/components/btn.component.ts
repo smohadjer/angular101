@@ -10,10 +10,9 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() text = '';
-  @Output() btnClick = new EventEmitter();
-
+  @Output() customClick = new EventEmitter();
 
   onClick() {
-    this.btnClick.emit();
+    this.customClick.emit('hello');
   }
 }
